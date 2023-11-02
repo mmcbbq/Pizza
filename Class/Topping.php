@@ -25,4 +25,13 @@ class Topping implements Bezahlung
     {
         return "<li>{$this->name}</li>";
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
 }

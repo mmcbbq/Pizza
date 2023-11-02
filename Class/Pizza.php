@@ -32,9 +32,12 @@ class Pizza implements Bezahlung
 
     }
 
-    public function addTopping(Topping $topping): void
+    public function addTopping(Topping ...$topping): void
     {
-        $this->toppings[] = $topping;
+        foreach ($topping as $item) {
+            $this->toppings[] = $item;
+        }
+
 
     }
 

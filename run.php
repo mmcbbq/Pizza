@@ -21,9 +21,8 @@ $pilze = new Topping('Pilze', 0.80);
 $ananas = new Topping('Ananas', 20.00);
 
 $pizza1 = new Pizza(true, 8.00);
-$pizza1->addTopping($salami);
-$pizza1->addTopping($salami);
-$pizza1->addTopping($pilze);
+$pizza1->addTopping($salami,$salami,$pilze);
+
 $bestellung->addBestellitem($pizza1);
 $pizza2 = new Pizza(false,5.00);
 $pizza2->addTopping($ananas);
@@ -41,6 +40,6 @@ $bestellung->addBestellitem($fanta);
 //print_r($pizza1);
 //print_r($pizza2);
 //print_r($salami);
-//print_r($bestellung);
+print_r($bestellung);
 //print_r($bestellung->rechnungsBetrag());
-echo $bestellung->rechnungHtml();
+//echo $bestellung->rechnungHtml();
