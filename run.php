@@ -1,7 +1,7 @@
 <?php
 
-function myAutoloader($className) {
-    $classFile = "Class/".$className . '.php';
+function myAutoloader($className ){
+    $classFile = "Class/".$className . '.php'; //Class/Kundedfgfdg.php
 
     if (file_exists($classFile)) {
         require_once $classFile;
@@ -38,8 +38,9 @@ $bestellung->addBestellitem($fanta);
 
 
 
-print_r($pizza1);
-print_r($pizza2);
-print_r($salami);
-print_r($bestellung);
-print_r($bestellung->rechnungsBetrag());
+//print_r($pizza1);
+//print_r($pizza2);
+//print_r($salami);
+//print_r($bestellung);
+//print_r($bestellung->rechnungsBetrag());
+echo $bestellung->rechnungHtml();

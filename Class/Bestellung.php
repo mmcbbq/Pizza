@@ -16,8 +16,11 @@ class Bestellung
 
     public function rechnungHtml():string
     {
-        $html = "<div> Name des Kunden {$this->kunde->getName()}";
-        //$html .= .......
+        $html = "<div> Name des kundenen {$this->kunde->getName()}</div>";
+        foreach ($this->bestellitems as $bestellitem) {
+            $html.= $bestellitem->html();
+        }
+        $html.="Summe: ".$this->rechnungsBetrag()."€";
         return $html;
     }
 

@@ -21,4 +21,8 @@ class Topping implements Bezahlung
         return $this->preis;
     }
 
+    public function html(): string
+    {
+        return "<li>{$this->name}</li>";
+    }
 }

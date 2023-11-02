@@ -23,4 +23,8 @@ class Getraenk implements Bezahlung
         return $this->preis;
     }
 
+    public function html(): string
+    {
+        return "<div>{$this->name} {$this->getPreis()}</div>";
+    }
 }

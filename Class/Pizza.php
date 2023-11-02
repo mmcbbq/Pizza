@@ -19,7 +19,7 @@ class Pizza implements Bezahlung
     }
 
 
-    public function getPreis():float
+    public function getPreis(): float
     {
         $preis = $this->basispreis;
 
@@ -29,13 +29,30 @@ class Pizza implements Bezahlung
 
         }
         return $preis;
-        
+
     }
 
-    public function addTopping(Topping $topping):void
+    public function addTopping(Topping $topping): void
     {
         $this->toppings[] = $topping;
-        
+
     }
 
+    public function html(): string
+    {
+        if ($this->groesse) {
+            $gr = 'gross';
+        } else {
+            $gr = 'klein';
+        }
+
+        $liste = "<ul>";
+        foreach ($this->toppings as $topping) {
+            $liste .= $topping->html();
+        }
+
+        $html = "<div>Pizza {$gr} {$liste} {$this->getPreis()} </div>";
+        $html.= "</ul>";
+        return $html;
+    }
 }
