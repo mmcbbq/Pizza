@@ -34,4 +34,9 @@ class Topping implements Bezahlung
         return $this->name;
     }
 
+    public static function findById(int $id):Topping
+    {
+
+    }
+
 }
