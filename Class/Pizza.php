@@ -2,8 +2,8 @@
 
 class Pizza implements Bezahlung
 {
-    private bool $groesse;
-    private float $basispreis;
+    private bool $groesse; // true = preis 8 false = 5
+//    private float $basispreis;
     private array $toppings;// [Salami, Pilze, .... ] -> Topping Objekte
 
     /**
@@ -11,17 +11,21 @@ class Pizza implements Bezahlung
      * @param float $basispreis
      * @param array $toppings
      */
-    public function __construct(bool $groesse, float $basispreis)
+    public function __construct(bool $groesse)
     {
         $this->groesse = $groesse;
-        $this->basispreis = $basispreis;
+
 
     }
 
 
     public function getPreis(): float
     {
-        $preis = $this->basispreis;
+        if ($this->groesse){
+            $preis = 8;
+        }else{
+            $preis = 5;
+        }
 
         foreach ($this->toppings as $topping) { //Salami 1,20 -> getPreis()
 

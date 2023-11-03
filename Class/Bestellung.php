@@ -4,6 +4,7 @@ class Bestellung
 {
     private Kunde $kunde;
     private array $bestellitems;
+    private Bezahlmethode $bezahlmethode;
 
     /**
      * @param Kunde $kunde
@@ -37,6 +38,30 @@ class Bestellung
     {
         $this->bestellitems[]= $item;
     }
+
+    /**
+     * @return Bezahlmethode
+     */
+    public function getBezahlmethode(): Bezahlmethode
+    {
+        return $this->bezahlmethode;
+    }
+
+    /**
+     * @param Bezahlmethode $bezahlmethode
+     */
+    public function setBezahlmethode(Bezahlmethode $bezahlmethode): void
+    {
+        $this->bezahlmethode = $bezahlmethode;
+    }
+
+    public function bezahlen():bool
+    {
+        return $this->bezahlmethode->bezahlen();
+
+    }
+
+
 
 
 }
