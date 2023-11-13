@@ -2,18 +2,23 @@
 
 class Topping implements Bezahlung
 {
+    private int $id;
     private string $name;
     private float $preis;
 
     /**
+     * @param int $id
      * @param string $name
      * @param float $preis
      */
-    public function __construct(string $name, float $preis)
+    public function __construct(int $id, string $name, float $preis)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->preis = $preis;
     }
+
+
 
 
     public function getPreis():float
@@ -34,9 +39,30 @@ class Topping implements Bezahlung
         return $this->name;
     }
 
-    public static function findById(int $id):Topping
+    public static function findbyID(int $id):self
     {
-
+        $servername = "localhost";
+        $username = "root";
+        $pass = "";
+        $dbname = "Pizza";
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname",$username,$pass);
+        $sql = "Select * From topping where id = :platzhalter";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['platzhalter' => $id]);
+        $result = $stmt->fetch(2);
+        return new Topping($result['id'],$result['name'],$result['preis']);
     }
+
+    public static function findAll():array
+    {
+        return [];
+    }
+
+
+
+
+
+
+
 
 }
