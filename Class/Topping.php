@@ -1,10 +1,11 @@
 <?php
 
-class Topping implements Bezahlung
+class Topping extends Dbconn implements Bezahlung
 {
     private int $id;
     private string $name;
     private float $preis;
+    protected static string $tblname = 'topping';
 
 //    public function __construct(int $id, string $name, float $preis)
 //    {
@@ -32,39 +33,39 @@ class Topping implements Bezahlung
         return $this->name;
     }
 
-    public static function findbyID(int $id): self
+
+
+    public static function create(string $name,float $preis):Topping
     {
-        $servername = "localhost";
-        $username = "root";
-        $pass = "";
-        $dbname = "Pizza";
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $pass);
-        $sql = "Select * From topping where id = :platzhalter";
+        $conn = self::getConn();
+        $sql = "INSERT INTO topping (name, preis) VALUES (:name, :preis)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['platzhalter' => $id]);
-        $result = $stmt->fetchObject('Topping');
-        return $result;
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':preis', $preis);
+        $stmt->execute();
+        return self::findbyID($conn->lastInsertId());
+
     }
 
 
-    public static function createTopping(): self
+
+
+
+
+    public static function update(int $id, string $name ,string $preis): void
     {
-
-        return
-
-    }
-
-
-    public function updateTopping(): void
-    {
-
-    }
-
-
-    public function deleteTopping():void
-    {
+        $conn = self::getConn();
+        $sql = 'UPDATE topping SET name = :name , preis = :preis WHERE id = :id';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':name' ,$name);
+        $stmt->bindParam(':preis' ,$preis);
+        $stmt->bindParam(':id' ,$id);
+        $stmt->execute();
 
     }
+
+
+
 
     public static function findAll(): array
     {

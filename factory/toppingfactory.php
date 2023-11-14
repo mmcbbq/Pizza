@@ -21,4 +21,5 @@ for ($i = 0; $i < 30; $i++) {
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':preis', $preis);
     $stmt->execute();
+
 }

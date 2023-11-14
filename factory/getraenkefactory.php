@@ -13,7 +13,7 @@ $faker->seed(100);
 for ($i = 0; $i < 10; $i++) {
 
 
-    $sql = 'INSERT INTO getraenke (name, preis) VALUES (:name, :preis)';
+    $sql = 'INSERT INTO getraenk (name, preis) VALUES (:name, :preis)';
 
     $name = $faker->word();
     $preis = $faker->randomFloat(2, 1, 9);

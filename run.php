@@ -9,11 +9,9 @@ function myAutoloader($className ){
 }
 spl_autoload_register('myAutoloader');
 
-$top =Topping::findbyID(4);
 
-print_r($top->html());
-
-
+//var_dump(Kunde::create('test','test','12346','tset','dsgfdgsfsag 45','esvklfglkj'));
+var_dump(Getraenk::findbyID(10));
 
 // Die benötigten credentials für die Datenbank----------------
 //$servername = "localhost";
