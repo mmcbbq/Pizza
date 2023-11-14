@@ -9,7 +9,7 @@ function myAutoloader($className ){
 }
 spl_autoload_register('myAutoloader');
 
-$top =Topping::findbyID(1);
+$top =Topping::findbyID(4);
 
 print_r($top->html());
 
