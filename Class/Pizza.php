@@ -1,22 +1,22 @@
 <?php
 
-class Pizza implements Bezahlung
+class Pizza extends Dbconn implements Bezahlung
 {
     private bool $groesse; // true = preis 8 false = 5
 //    private float $basispreis;
     private array $toppings;// [Salami, Pilze, .... ] -> Topping Objekte
 
-    /**
-     * @param bool $groesse
-     * @param float $basispreis
-     * @param array $toppings
-     */
-    public function __construct(bool $groesse)
-    {
-        $this->groesse = $groesse;
-
-
-    }
+//    /**
+//     * @param bool $groesse
+//     * @param float $basispreis
+//     * @param array $toppings
+//     */
+//    public function __construct(bool $groesse)
+//    {
+//        $this->groesse = $groesse;
+//
+//
+//    }
 
 
     public function getPreis(): float
@@ -62,4 +62,10 @@ class Pizza implements Bezahlung
         $html.= "</ul>";
         return $html;
     }
+
+
+
+
+
+
 }

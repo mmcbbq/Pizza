@@ -15,10 +15,8 @@ abstract class Dbconn
     public static function findbyID(int $id):self
     {
         $tblname = static::$tblname;
-
-
         $conn = self::getConn();
-        $sql = "SELECT * FROM {$tblname} WHERE id = :id";
+        $sql = "SELECT * FROM $tblname WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
