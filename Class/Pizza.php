@@ -7,6 +7,14 @@ class Pizza extends Dbconn implements Bezahlung
 //    private float $basispreis;
     private array $toppings;// [Salami, Pilze, .... ] -> Topping Objekte
 
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
     public function getPreis(): float
     {
         if ($this->groesse) {
@@ -90,7 +98,7 @@ class Pizza extends Dbconn implements Bezahlung
      * @return void
      */
 
-    public function topinDb():void
+    public function topInDb():void
     {
         $conn = self::getConn(); // erstellen eines PDO Objektes
 
@@ -111,10 +119,27 @@ class Pizza extends Dbconn implements Bezahlung
 
     }
 
-    public function changeTop()
+    public function deleteTop(Topping $toppingremove):void
     {
-        
+        foreach ($this->toppings as $index=>$topping) {
+            if ($topping == $toppingremove)
+            {
+                unset($this->toppings[$index]);
+                break;
+            }
+        }
+
     }
+    public function changeTopDB():void
+    {
+        $conn = self::getConn(); // erstellen eines PDO Objektes
+        $sql = 'DELETE FROM pizza_topping WHERE pizzaid = :pizzaid';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':pizzaid', $this->id);
+        $stmt->execute();
+        $this->topinDb();
+    }
+
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 function myAutoloader($className ){
-    $classFile = "Class/".$className . '.php'; //Class/Kundedfgfdg.php
+    $classFile = "Class/".$className . '.php'; //Class/Kunde.php
 
     if (file_exists($classFile)) {
         require_once $classFile;
@@ -9,15 +9,31 @@ function myAutoloader($className ){
 }
 spl_autoload_register('myAutoloader');
 
-
-//var_dump(Kunde::create('test','test','12346','tset','dsgfdgsfsag 45','esvklfglkj'));
+$bestellung = Bestellung::create(1);
 $pizza = Pizza::create(true);
 $top1 = Topping::findbyID(10);
 $top2 = Topping::findbyID(8);
 $top3 = Topping::findbyID(7);
 $pizza->addTopping($top1,$top2,$top3);
-$pizza->topinDb();
-var_dump($pizza);
+$pizza->topInDb();
+$bestellung->addBestellitem($pizza);
+$bestellung->addBestellitem(Getraenk::findbyID(5));
+$bestellung->addBestellitem(Getraenk::findbyID(6));
+$bestellung->bestellinDB();
+var_dump($bestellung);
+
+
+//var_dump(Kunde::create('test','test','12346','tset','dsgfdgsfsag 45','esvklfglkj'));
+//$pizza = Pizza::create(true);
+//$top1 = Topping::findbyID(10);
+//$top2 = Topping::findbyID(8);
+//$top3 = Topping::findbyID(7);
+//$pizza->addTopping($top1,$top2,$top3);
+//$pizza->topinDb();
+//$pizza->deleteTop($top1);
+//$pizza->changeTopDB();
+//
+//var_dump($pizza);
 
 // Die benötigten credentials für die Datenbank----------------
 //$servername = "localhost";

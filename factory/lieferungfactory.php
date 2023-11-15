@@ -12,7 +12,7 @@ $faker->seed(100);
 $pizzaid = 1;
 for ($kunde = 1; $kunde <= 100; $kunde++) { //für jeden kunden bestellungen hinzufügen
     for ($bestellung = 0; $bestellung < $faker->numberBetween(1,5); $bestellung++) {//1-5 Bestellungen pro Kunde
-        $sql = 'INSERT INTO lieferung (kundenid) VALUES (:kundenid)';
+        $sql = 'INSERT INTO bestellung (kundenid) VALUES (:kundenid)';
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':kundenid', $kunde);
         $stmt->execute();

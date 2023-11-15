@@ -7,13 +7,14 @@ class Bestellung extends Dbconn
     private array $bestellitems;
     private Bezahlmethode $bezahlmethode;
 
-//    /**
-//     * @param Kunde $kunde
-//     */
-////    public function __construct(Kunde $kunde)
-////    {
-////        $this->kunde = $kunde;
-////    }
+    /**
+     * @param Kunde $kunde
+     */
+    public function __construct(int $id,Kunde $kunde)
+    {
+        $this->id = $id;
+        $this->kunde = $kunde;
+    }
 
 
     public function rechnungHtml():string
@@ -66,7 +67,7 @@ class Bestellung extends Dbconn
     public static function create(int $kundenid):self
     {
         $conn = self::getConn();
-        $sql = 'INSERT INTO lieferung (kundenid) values (:kundenid)';
+        $sql = 'INSERT INTO bestellung (kundenid) values (:kundenid)';
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':kundenid', $kundenid);
         $stmt->execute();
@@ -76,7 +77,7 @@ class Bestellung extends Dbconn
     public static function update(int $id, bool $grosse):void
     {
         $conn = self::getConn();
-        $sql = 'UPDATE lieferung SET kundenid = :kundenid WHERE bestellnummer = :id';
+        $sql = 'UPDATE bestellung SET kundenid = :kundenid WHERE id = :id';
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':kundenid', $kundenid);
         $stmt->bindParam(':id', $id);
@@ -84,5 +85,52 @@ class Bestellung extends Dbconn
 
     }
 
+    public static function findbyID(int $id):static
+    {
+        $tblname = static::class;
+        $conn = self::getConn();
+        $sql = "SELECT * FROM $tblname WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(2); // Array des Datensatzes aus der Tbl bestellung
+        $kunde = Kunde::findbyID($result['kundenid']); // Erstellen Kunde mit der ID aus dem $result Datensatz
+        return new Bestellung($id, $kunde);
+    }
 
+    public function bestellinDB()
+    {
+        $conn = self::getConn();
+        foreach ($this->bestellitems as $bestellitem) {
+            if (get_class($bestellitem ) == 'Getraenk')
+            {
+                $gid = $bestellitem->getId();
+                $sql = 'INSERT INTO getraenke_lieferung (bestellnummer, getraenkeid) VALUES (:bestellnummer , :getraenkeid)';
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':bestellnummer', $this->id);
+                $stmt->bindParam(':getraenkeid', $gid);
+                $stmt->execute();
+            }
+            elseif (get_class($bestellitem )== 'Pizza'){
+                $pid = $bestellitem->getId();
+                $sql = 'INSERT INTO pizza_lieferung (bestellnummer, pizzaid) VALUES (:bestellnummer , :pizzaid)';
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':bestellnummer', $this->id);
+                $stmt->bindParam(':pizzaid', $pid );
+                $stmt->execute();
+            }
+        }
+
+    }
+
+    public function getBestellungDb()
+    {
+        $sql = "SELECT b.id, b.kundenid, gl.id, pl.id FROM bestellung b 
+left join getraenke_lieferung gl on b.id = gl.bestellnummer
+left join pizza_lieferung pl on b.id = pl.bestellnummer
+where b.id = 50;";
+
+
+
+}
 }

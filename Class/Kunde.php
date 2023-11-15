@@ -9,8 +9,8 @@ class Kunde extends Dbconn
     private string $ort;
     private string $strasse;
 
-    protected static string $tblname = 'Kunde';
-
+//    protected static string $tblname = 'Kunde';
+//
 //    /**
 //     * @param string $vorname
 //     * @param string $nachname

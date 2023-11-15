@@ -3,7 +3,7 @@
 class Getraenk extends Dbconn implements Bezahlung
 {
 
-
+    private int $id;
     private string $name;
     private float $preis;
     protected static string $tblname = 'getraenk';
@@ -19,6 +19,13 @@ class Getraenk extends Dbconn implements Bezahlung
 //    }
 
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
     public function getPreis():float
     {
         return $this->preis;

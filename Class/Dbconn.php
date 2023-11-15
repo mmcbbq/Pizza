@@ -2,7 +2,7 @@
 
 abstract class Dbconn
 {
-    protected static string $tblname = '';
+//    protected static string $tblname = '';
     protected static function getConn():PDO
     {
         $servername = "localhost";
@@ -27,12 +27,11 @@ abstract class Dbconn
 
     public static function delete(int $id):void
     {
-        $tbl = static::$tblname;
+        $tbl = static::class;
         $conn = self::getConn();
         $sql = "DELETE FROM $tbl WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-
     }
 }

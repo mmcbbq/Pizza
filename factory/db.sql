@@ -46,9 +46,9 @@ CREATE Table pizza_topping
     FOREIGN KEY (toppingid) REFERENCES topping (id) ON DELETE CASCADE
 );
 
-CREATE TABLE lieferung
+CREATE TABLE bestellung
 (
-    bestellnummer int auto_increment PRIMARY KEY,
+    id int auto_increment PRIMARY KEY,
     kundenid     int,
     FOREIGN KEY (kundenid) REFERENCES Kunde (id) ON DELETE CASCADE
 );
@@ -60,7 +60,7 @@ CREATE TABLE pizza_lieferung
     bestellnummer int,
     pizzaid      int,
     FOREIGN KEY (pizzaid) REFERENCES pizza (id) ON DELETE CASCADE,
-    FOREIGN KEY (bestellnummer) REFERENCES lieferung (bestellnummer) ON DELETE CASCADE
+    FOREIGN KEY (bestellnummer) REFERENCES bestellung (id) ON DELETE CASCADE
 );
 
 CREATE TABLE getraenke_lieferung
@@ -68,6 +68,6 @@ CREATE TABLE getraenke_lieferung
     id           int auto_increment PRIMARY KEY,
     bestellnummer int,
     getraenkeid  int,
-    FOREIGN KEY (bestellnummer) REFERENCES lieferung (bestellnummer) ON DELETE CASCADE,
+    FOREIGN KEY (bestellnummer) REFERENCES bestellung (id) ON DELETE CASCADE,
     FOREIGN KEY (getraenkeid) REFERENCES getraenk (id) ON DELETE CASCADE
 );
