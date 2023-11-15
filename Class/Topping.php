@@ -7,12 +7,26 @@ class Topping extends Dbconn implements Bezahlung
     private float $preis;
     protected static string $tblname = 'topping';
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+
 //    public function __construct(int $id, string $name, float $preis)
 //    {
 //        $this->id = $id;
 //        $this->name = $name;
 //        $this->preis = $preis;
 //    }
+
+
+
+
 
 
     public function getPreis(): float

@@ -11,7 +11,13 @@ spl_autoload_register('myAutoloader');
 
 
 //var_dump(Kunde::create('test','test','12346','tset','dsgfdgsfsag 45','esvklfglkj'));
-var_dump(Getraenk::findbyID(10));
+$pizza = Pizza::create(true);
+$top1 = Topping::findbyID(10);
+$top2 = Topping::findbyID(8);
+$top3 = Topping::findbyID(7);
+$pizza->addTopping($top1,$top2,$top3);
+$pizza->topinDb();
+var_dump($pizza);
 
 // Die benötigten credentials für die Datenbank----------------
 //$servername = "localhost";

@@ -12,9 +12,9 @@ abstract class Dbconn
         return  new PDO("mysql:host=$servername;dbname=$dbname", $username, $pass);
     }
 
-    public static function findbyID(int $id):self
+    public static function findbyID(int $id):static
     {
-        $tblname = static::$tblname;
+        $tblname = static::class;
         $conn = self::getConn();
         $sql = "SELECT * FROM $tblname WHERE id = :id";
         $stmt = $conn->prepare($sql);

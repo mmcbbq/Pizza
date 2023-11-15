@@ -2,6 +2,7 @@
 
 class Kunde extends Dbconn
 {
+    private int $id;
     private string $vorname;
     private string $nachname;
     private string $plz;
